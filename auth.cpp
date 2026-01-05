@@ -217,6 +217,9 @@ void getValidFullname(string &fullname)
         cout << "\n\nEnter Your Fullname: ";
         getline(cin, fullname);
 
+        // Trim whitespace
+        fullname = trim(fullname);
+
         // Check if empty
         if (fullname.empty()) 
         {
@@ -224,23 +227,38 @@ void getValidFullname(string &fullname)
             continue; 
         }
 
-        // Check if all characters are letters
-        bool allLetters = true;
-        for (char c : fullname) 
-        {
-            if (!isalpha(c))  // if not a letter
-            {
-                allLetters = false;
-                break;
-            }
+        // Limit length to avoid extremely large inputs
+        if (fullname.size() > 1024) {
+            cout << "Name is too long. Please enter a shorter name (max 1024 chars).\n";
+            continue;
         }
 
-        if (!allLetters) 
-        { 
-            cout << "\nOops! Names can only contain letters 😎. Please try again.\n";
+        // Validate characters: allow letters (including UTF-8 bytes), spaces, hyphens and apostrophes.
+        // Reject digits, pipe character '|' (used as delimiter) and control characters.
+        bool invalid = false;
+        for (unsigned char uc : fullname) {
+            if (uc == '|' || uc == '\n' || uc == '\r' || uc == '\t') {
+                invalid = true; break;
+            }
+            if (uc >= '0' && uc <= '9') { // reject ASCII digits
+                invalid = true; break;
+            }
+            // allow space, hyphen, apostrophe explicitly
+            if (uc == ' ' || uc == '-' || uc == '\'' ) continue;
+            // allow ASCII letters
+            if ((uc >= 'A' && uc <= 'Z') || (uc >= 'a' && uc <= 'z')) continue;
+            // allow non-ASCII bytes (part of UTF-8 multi-byte sequences)
+            if (uc >= 0x80) continue;
+            // anything else is invalid
+            // (this will still permit many valid Unicode letters because their bytes are >=0x80)
+            invalid = true; break;
+        }
+
+        if (invalid) {
+            cout << "\nInvalid name. Use letters, spaces, hyphens or apostrophes only (no digits or '|'). Please try again.\n";
             continue;
-        } 
-        
+        }
+
         // Valid name, exit loop
         break;
     }
@@ -505,6 +523,7 @@ bool authentication(UserProfile& profile)
 		{
 	        case '1': 
 			{
+                system("cls");
 				registerUser(choice);
 				
 				// cout << "👉 Press Enter to login to your account...";
