@@ -36,7 +36,13 @@ struct FoodItem {
 struct DailyLog {
     string date;
     vector<pair<FoodItem, double>> consumedMeals; // FoodItem + quantity consumed in grams
-    
+    string mealType;      // "Breakfast", "Lunch", etc.
+    string foodName;
+    double grams;
+    double calories;
+    double protein;
+    double carbs;
+    double fat;
     double totalCalories = 0.0;
     double totalProtein = 0.0;
     double totalCarbs = 0.0;
