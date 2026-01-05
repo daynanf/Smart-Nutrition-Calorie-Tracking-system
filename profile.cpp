@@ -103,6 +103,14 @@ void loadProfileFromFile(const std::string& filename, UserProfile& p) {
         return;
     }
 
+    // Infer username from filename pattern "user_<username>_data.txt"
+    // If filename matches, set p.username so other modules have it available.
+    size_t ustart = filename.find("user_");
+    size_t uend = filename.find("_data");
+    if (ustart != std::string::npos && uend != std::string::npos && uend > ustart + 5) {
+        p.username = filename.substr(ustart + 5, uend - (ustart + 5));
+    }
+
     std::string line;
     bool inProfile = false;
 

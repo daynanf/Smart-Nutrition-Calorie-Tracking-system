@@ -411,10 +411,14 @@ void runEndDaySummary(const UserProfile& p) {
         cout << "⚠ Protein is under target.\n";
     }
 
-    if (consumed.fat > p.targetFat_g) {
+    // Use a small tolerance to avoid floating-point noise and provide clearer guidance
+    double tol = 0.5; // grams
+    if (consumed.fat > p.targetFat_g + tol) {
         cout << "⚠ Slightly high fat — consider leaner meals tomorrow.\n";
+    } else if (consumed.fat + tol < p.targetFat_g) {
+        cout << "⚠ Fat intake is below target — include some healthy fats.\n";
     } else {
-         cout << "✔ Fat intake is within limits.\n";
+        cout << "✔ Fat intake is within limits.\n";
     }
 
     cout << "\nDAILY_LOG written successfully.\n";

@@ -202,7 +202,7 @@ void searchInFile(const string& filename, const string& searchWord, vector<FoodI
 void saveToDailyLog(const string& filename, const DailyLog& entry) {
     // Read current file lines
     vector<string> lines;
-    ifstream inFile(filename.c_str());
+    ifstream inFile(filename);
     string line;
     while (getline(inFile, line)) lines.push_back(line);
     inFile.close();
@@ -304,7 +304,7 @@ void runAddCustomFood(const UserProfile& p) {
     newFood.fat = safeStof(input, 0.0f);
     
     string customFile = "user_" + p.username + "_custom_foods.txt";
-    ofstream file(customFile.c_str(), ios::app);
+    ofstream file(customFile, ios::app);
     
     if (file) {
         file << newFood.name << " | " << newFood.calories << " | " 
@@ -441,7 +441,7 @@ void runViewConsumption(const UserProfile& up){
     system("cls");
     cout << "\n=== Today's Consumption ===\n";
                 string logfile = "user_" + up.username + "_data.txt";
-                ifstream f(logfile.c_str());
+                ifstream f(logfile);
                 if (!f) {
                     cout << "No data found (file missing).\n";
                 } else {

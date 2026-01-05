@@ -56,12 +56,10 @@ int main() {
                     case '1':
                         printHeader("MY PROFILE");
                         displayProfile(currentUser);
-                        pauseConsole();
                         break;
                     case '2':
                         printHeader("DAILY TARGETS");
                         displayNutritionTargets(currentUser);
-                        pauseConsole();
                         break;
                     case '3':
                         runAddFood(currentUser);

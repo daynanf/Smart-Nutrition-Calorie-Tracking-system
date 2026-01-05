@@ -503,11 +503,14 @@ bool loginUser( UserProfile& profile,char choice)
 
 	    cout << "\n\nLogin successful! \n";
 	    cout << "Welcome back, 👤 " << inputUsername << "!\n\n";
-	    cout << "👉 Press Enter to continue.....";
+	    
+        string filename = "user_" + inputUsername + "_data.txt";
+        // Ensure profile.username is set so subsequent operations use correct per-user files
+        profile.username = inputUsername;
+        loadProfileFromFile(filename, profile);
+        cout << "👉 Press Enter to continue.....";
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cin.get();
-        string filename = "user_" + inputUsername + "_data.txt";
-		loadProfileFromFile(filename,profile);
 		// Clear screen and show welcome
 	    system("cls"); 
         return true;
