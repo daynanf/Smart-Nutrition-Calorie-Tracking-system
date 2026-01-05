@@ -6,6 +6,8 @@
 #include <iomanip>
 
 using namespace std;
+// Place test-only definitions in an anonymous namespace to give them internal linkage
+namespace {
 
 // BMR Calculation (Mifflin-St Jeor)
 double calcBMR(const UserProfile& p) {
@@ -53,13 +55,6 @@ void saveUserProfile(const UserProfile& p) {
     file << "Daily_Calorie_Target: " << p.dailyCaloriesTarget << "\n";
     file << "\n"; // End of profile block
 
-    // Note: In a real append scenario, we'd need to be careful not to lose Daily Logs.
-    // user_data file structure: Profile Block + Daily Logs.
-    // For this implementation, if we are just creating/updating profile, we assume we might be rewriting or we handle it carefully.
-    // Since the original code had distinct create/update, let's just use this for Creation.
-    // Ideally, for update, we would read the whole file and rewrite the top. 
-    // But for now, let's assume this is mostly for creation.
-    
     file.close();
 }
 
@@ -93,7 +88,7 @@ bool loadUserProfile(const string& username, UserProfile& p) {
         else if (key == "Height") p.height_cm = stoi(val);
         else if (key == "Weight") p.weight_kg = stod(val);
         else if (key == "Activity_Level") p.activityLevel = val;
-        else if (key == "Daily_Calorie_Target") p.dailyCaloriesTarget = stod(val);
+        else if (key == "Daily_Calorie_TARGET") p.dailyCaloriesTarget = stod(val);
     }
     
     calcMacroTargets(p); // Recalculate based on loaded data to be safe
@@ -117,3 +112,5 @@ void displayProfile(const UserProfile& p) {
     cout << "Weight    : " << p.weight_kg << " kg\n";
     cout << "Activity  : " << p.activityLevel << "\n";
 }
+
+} // anonymous namespace

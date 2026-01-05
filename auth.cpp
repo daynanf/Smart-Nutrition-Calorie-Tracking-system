@@ -444,7 +444,8 @@ void registerUser(char choice)
 		getValidWeight(ua.weight_kg);
 		
 		getValidActivityLevel(ua.activityLevel);
-
+        
+        calcMacroTargets(ua);
 
         // Append mode and raw string literal for file path
         ofstream file("users.txt", ios::app);
@@ -455,6 +456,7 @@ void registerUser(char choice)
 
         file << ua.username << "|"
              << ua.password << "|"
+             << "|user_" << ua.username << "_data.txt"
              << ua.fullName << "|"
              << ua.age << "|"
              << ua.gender << "|"
@@ -463,6 +465,8 @@ void registerUser(char choice)
              <<ua.activityLevel<<"\n";
         file.close();
 
+        string filename = "user_" + ua.username + "_data.txt";
+        createUserDataFile(filename, ua);
         cout << "\n--------------------------------------------\n"
              << " 🎉✅ Profile created successfully! 👤 \n"
              << "--------------------------------------------\n\n";
