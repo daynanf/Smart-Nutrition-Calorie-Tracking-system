@@ -5,7 +5,6 @@
 #include <iostream>
 #include <algorithm>
 #include <limits>       // For numeric_limits
-#include <windows.h>    // For console settings
 
 // Function declarations
 void setupConsole();

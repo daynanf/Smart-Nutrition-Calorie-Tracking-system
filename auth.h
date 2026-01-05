@@ -31,7 +31,7 @@ void getValidActivityLevel(string &activityLevel);
 
 // User flow functions
 void registerUser(char choice);
-bool loginUser(char choice);
+bool loginUser(UserProfile& profile, char choice);
 bool authentication(UserProfile &profile);
 
 #endif

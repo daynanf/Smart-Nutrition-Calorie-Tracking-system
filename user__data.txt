@@ -1,0 +1,5 @@
+DAILY_LOG
+Date: 2026-01-05
+Type: Breakfast
+doro wat (standard) | 693.8 | 61.1 | 33.3 | 38.9 | 555.0
+END_DAILY_LOG

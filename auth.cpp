@@ -515,14 +515,14 @@ bool authentication(UserProfile& profile)
 				// // Call loginUser with choice = '2'
     			// loginUser('2');
     			
-	            return; // exit main
+	            return false; // exit main, back to welcome screen
 	        }
 	
 		    case '2': 
 			{
 				isLoggedIn = loginUser(profile,choice);
 			
-			    return;  // exits this module and goes to main
+			    return isLoggedIn;  // exits this module and goes to main
 			}
 
 	        case '3':
