@@ -466,13 +466,14 @@ void registerUser(char choice)
         file.close();
 
         string filename = "user_" + ua.username + "_data.txt";
+
         createUserDataFile(filename, ua);
         cout << "\n--------------------------------------------\n"
              << " 🎉✅ Profile created successfully! 👤 \n"
              << "--------------------------------------------\n\n";
 }
 
-bool loginUser(char choice)
+bool loginUser( UserProfile& profile,char choice)
 {
 	cout << "\n--- Login ---\n";
 	    string inputUsername, inputPassword;
@@ -485,18 +486,19 @@ bool loginUser(char choice)
 	    cout << "👉 Press Enter to continue.....";
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cin.get();
-		
+        string filename = "user_" + inputUsername + "_data.txt";
+		loadProfileFromFile(filename,profile);
 		// Clear screen and show welcome
 	    system("cls"); 
         return true;
 }
-bool authentication()
+bool authentication(UserProfile& profile)
 {
-	firstWellcomePage();
+	// firstWellcomePage();
 	char choice;
     cin >> choice;
 	cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear leftover newline
-    
+    bool isLoggedIn = false;
     while(true)
     {
     	switch (choice) 
@@ -505,20 +507,20 @@ bool authentication()
 			{
 				registerUser(choice);
 				
-				cout << "👉 Press Enter to login to your account...";
-		        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-				cin.get();
-				system("cls");
+				// cout << "👉 Press Enter to login to your account...";
+		        // cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				// cin.get();
+				// system("cls");
 				
-				// Call loginUser with choice = '2'
-    			loginUser('2');
+				// // Call loginUser with choice = '2'
+    			// loginUser('2');
     			
 	            return; // exit main
 	        }
 	
 		    case '2': 
 			{
-				loginUser(choice);
+				isLoggedIn = loginUser(profile,choice);
 			
 			    return;  // exits this module and goes to main
 			}
@@ -541,4 +543,5 @@ bool authentication()
 			}
 	    }	
 	}
+    return isLoggedIn;
 }
