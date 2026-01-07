@@ -423,3 +423,9 @@ void runEndDaySummary(const UserProfile& p) {
     cout << "\nDAILY_LOG written successfully.\n";
     pauseConsole();
 }
+
+
+
+
+
+
