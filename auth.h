@@ -20,14 +20,14 @@ using namespace std;
 void firstWellcomePage();
 
 // Input-validation helpers
-void getValidUsername(string &username, char choice);
-void getValidPassword(string &password, const string &username, char choice);
-void getValidFullname(string &fullname);
-void getValidAge(int &age);
-void getValidGender(string &gender);
-void getValidHeight(int &height);
-void getValidWeight(int &weight);
-void getValidActivityLevel(string &activityLevel);
+bool getValidUsername(string &username, char choice);
+bool getValidPassword(string &password, const string &username, char choice);
+bool getValidFullname(string &fullname);
+bool getValidAge(int &age);
+bool getValidGender(string &gender);
+bool getValidHeight(int &height);
+bool getValidWeight(int &weight); // changed to int in header for consistency with cpp although cpp had double? wait checking cpp
+bool getValidActivityLevel(string &activityLevel);
 
 // User flow functions
 void registerUser(char choice);

@@ -91,3 +91,17 @@ void getValidDouble(double& value, double min, double max) {
         break;
     }
 }
+
+bool checkForBack(const string& input) {
+    if (input == "b" || input == "B") {
+        cout << "\nAre you sure you want to go back? (y/n): ";
+        char confirm;
+        cin >> confirm;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        
+        if (confirm == 'y' || confirm == 'Y') {
+            return true;
+        }
+    }
+    return false;
+}

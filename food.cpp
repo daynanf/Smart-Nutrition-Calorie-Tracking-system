@@ -68,9 +68,7 @@ string currentUsername = "";
 
 
 
-bool checkForBack(const string& input) {
-    return (input == "b" || input == "B");
-}
+
 
 int safeStoi(const string& s, int defaultVal = -1) {
     string t = trim(s);
