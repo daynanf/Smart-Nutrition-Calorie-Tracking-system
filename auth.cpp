@@ -558,8 +558,8 @@ start_age:
     }
 
     file << ua.username << "|"
-            << ua.password << "|"
-            << "|user_" << ua.username << "_data.txt"
+            << ua.password
+            << "| user_" << ua.username << "_data.txt"
             << ua.fullName << "|"
             << ua.age << "|"
             << ua.gender << "|"
