@@ -233,41 +233,77 @@ void runAddCustomFood(const UserProfile& p) {
     FoodItem newFood;
     
     string input;
-    cout << "Enter food name (or 'b' to go back): ";
-    getline(cin, input);
-    input = trim(input);
-    if (checkForBack(input)) return;
-    newFood.name = input;
-    
-    cout << "Serving size in grams (usually 100): ";
-    getline(cin, input);
-    input = trim(input);
-    if (checkForBack(input)) return;
-    newFood.servingSize = safeStof(input, 100.0f);
-    
-    cout << "Calories per " << newFood.servingSize << "g: ";
-    getline(cin, input);
-    input = trim(input);
-    if (checkForBack(input)) return;
-    newFood.calories = safeStof(input, 0.0f);
-    
-    cout << "Protein (g): ";
-    getline(cin, input);
-    input = trim(input);
-    if (checkForBack(input)) return;
-    newFood.protein = safeStof(input, 0.0f);
-    
-    cout << "Carbs (g): ";
-    getline(cin, input);
-    input = trim(input);
-    if (checkForBack(input)) return;
-    newFood.carbs = safeStof(input, 0.0f);
-    
-    cout << "Fat (g): ";
-    getline(cin, input);
-    input = trim(input);
-    if (checkForBack(input)) return;
-    newFood.fat = safeStof(input, 0.0f);
+    // Name: required, non-empty
+    while (true) {
+        cout << "Enter food name (or 'b' to go back): ";
+        getline(cin, input);
+        input = trim(input);
+        if (checkForBack(input)) return;
+        if (input.empty()) { cout << "Name cannot be empty. Try again.\n"; continue; }
+        if (input.size() > 200) { cout << "Name too long. Keep it under 200 chars.\n"; continue; }
+        newFood.name = input;
+        break;
+    }
+
+    // Serving size: positive float
+    while (true) {
+        cout << "Serving size in grams (usually 100): ";
+        getline(cin, input);
+        input = trim(input);
+        if (checkForBack(input)) return;
+        float v = safeStof(input, -1.0f);
+        if (v <= 0.0f) { cout << "Please enter a positive number for serving size.\n"; continue; }
+        newFood.servingSize = v;
+        break;
+    }
+
+    // Calories: non-negative
+    while (true) {
+        cout << "Calories per " << newFood.servingSize << "g: ";
+        getline(cin, input);
+        input = trim(input);
+        if (checkForBack(input)) return;
+        float v = safeStof(input, -1.0f);
+        if (v < 0.0f) { cout << "Please enter 0 or a positive number for calories.\n"; continue; }
+        newFood.calories = v;
+        break;
+    }
+
+    // Protein: non-negative
+    while (true) {
+        cout << "Protein (g): ";
+        getline(cin, input);
+        input = trim(input);
+        if (checkForBack(input)) return;
+        float v = safeStof(input, -1.0f);
+        if (v < 0.0f) { cout << "Please enter 0 or a positive number for protein.\n"; continue; }
+        newFood.protein = v;
+        break;
+    }
+
+    // Carbs: non-negative
+    while (true) {
+        cout << "Carbs (g): ";
+        getline(cin, input);
+        input = trim(input);
+        if (checkForBack(input)) return;
+        float v = safeStof(input, -1.0f);
+        if (v < 0.0f) { cout << "Please enter 0 or a positive number for carbs.\n"; continue; }
+        newFood.carbs = v;
+        break;
+    }
+
+    // Fat: non-negative
+    while (true) {
+        cout << "Fat (g): ";
+        getline(cin, input);
+        input = trim(input);
+        if (checkForBack(input)) return;
+        float v = safeStof(input, -1.0f);
+        if (v < 0.0f) { cout << "Please enter 0 or a positive number for fat.\n"; continue; }
+        newFood.fat = v;
+        break;
+    }
     
     string customFile = "user_" + p.username + "_custom_foods.txt";
     ofstream file(customFile, ios::app);
@@ -282,12 +318,22 @@ void runAddCustomFood(const UserProfile& p) {
         cout << "Error saving custom food!" << endl;
     }
     
-    cout << "\nAdd this food to a meal now?\n1. Yes\n2. No\nChoice: ";
-    string choice;
-    getline(cin, choice);
-    choice = trim(choice);
-    if (choice == "1") {
-        UserProfile up = parseUserProfile(p.username);
+    // Confirm and optionally add now. Validate response.
+    while (true) {
+        cout << "\nAdd this food to a meal now?\n1. Yes\n2. No\nChoice: ";
+        string choice;
+        getline(cin, choice);
+        choice = trim(choice);
+        if (checkForBack(choice)) return;
+        if (choice == "1") {
+            UserProfile up = parseUserProfile(p.username);
+            break;
+        } else if (choice == "2" || choice.empty()) {
+            break;
+        } else {
+            cout << "Please enter 1 or 2 (or 'b' to cancel).\n";
+            continue;
+        }
     }
 }
 
