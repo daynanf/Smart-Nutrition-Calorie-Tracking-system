@@ -436,7 +436,7 @@ void runEndDaySummary(const UserProfile& p) {
         cout << "✔ Fat intake is within limits.\n";
     }
 
-    cout << "\nDAILY_LOG written successfully.\n";
+    cout << "\nSummary generated successfully.\n";
     pauseConsole();
 }
 
