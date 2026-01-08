@@ -26,7 +26,7 @@ static void writeProfileBlock(std::ostream& out, const UserProfile& p) {
 // Computes BMR (Basal Metabolic Rate) using the Mifflin-St Jeor formula.
 // Adjusts calculation based on gender (Male/Female).
 double calcBMR(const UserProfile& p) {
-    if (p.gender == "Male" || p.gender == "male") {
+    if (p.gender == "Male") {
         return 10.0 * p.weight_kg + 6.25 * p.height_cm - 5.0 * p.age + 5.0;
     } else {
         return 10.0 * p.weight_kg + 6.25 * p.height_cm - 5.0 * p.age - 161.0;
@@ -143,7 +143,7 @@ void loadProfileFromFile(const std::string& filename, UserProfile& p) {
         else if (key == "Age") p.age = std::stoi(val);
         else if (key == "Gender") p.gender = val;
         else if (key == "Height") p.height_cm = std::stod(val);
-        else if (key == "Weight") p.weight_kg = std::stod(val);
+        else if (key == "Weight") p.weight_kg = std::stoi(val);
         else if (key == "Activity_Level") p.activityLevel = val;
         else if (key == "Daily_Calorie_Target") p.dailyCaloriesTarget = std::stod(val);
     }
@@ -154,7 +154,7 @@ void loadProfileFromFile(const std::string& filename, UserProfile& p) {
 
 
 // Prompts the user to update their weight and recalculates nutrition targets.
-// Persists the new weight to the file if the update is confirmed.
+
 void updateWeightAndTargets(const std::string& filename, UserProfile& p) {
     std::cout << "\n--- Update Weight ---\n";
     std::cout << "Current weight: " << p.weight_kg << " kg\n";

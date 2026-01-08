@@ -5,12 +5,6 @@
 #include <string>
 
 /**
- * Collects full user profile from input during registration.
- * Returns filled UserProfile (or empty if cancelled with 'b').
- */
-UserProfile collectProfileFromUser();
-
-/**
  * Calculates BMR, TDEE, and macro targets (protein/carbs/fat) for the given profile.
  * Updates the profile struct directly.
  */
@@ -42,8 +36,8 @@ void loadProfileFromFile(const std::string& filename, UserProfile& p);
 
 /**
  * Prompts for new weight, recalculates targets, rewrites USER_PROFILE block,
- * and appends WEIGHT_UPDATE block to the file.
- * Called from dashboard menu (e.g. option 9).
+ * and changes WEIGHT_UPDATE block to the file.
+ * Called from dashboard menu (e.g. option 8).
  */
 void updateWeightAndTargets(const std::string& filename, UserProfile& p);
 
