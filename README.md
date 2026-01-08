@@ -1,7 +1,7 @@
-# Daily Nutrition & Calorie Tracking System
+# Smart-Nutrition-Calorie-Tracking-system
 
 ## 📘 Project Overview
-The **Daily Nutrition & Calorie Tracking System** is a console-based C++ application designed to help users manage their dietary habits. It creates personalized nutritional targets based on user statistics (age, gender, height, weight, activity level) using the Mifflin-St Jeor equation. Users can log meals, view their daily consumption against targets, add custom foods, and receive algorithm-based meal recommendations.
+The **Smart-Nutrition-Calorie-Tracking-system** is a console-based C++ application designed to help users manage their dietary habits. It creates personalized nutritional targets based on user statistics (age, gender, height, weight, activity level) using the Mifflin-St Jeor equation. Users can log meals, view their daily consumption against targets, add custom foods, and receive algorithm-based meal recommendations.
 
 ---
 
